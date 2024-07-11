@@ -89,8 +89,6 @@ void Parser::parsingCommandLine(QStringList arguments)
             systemd_ = true, daemon_ = false;
         else if (opt.startsWith("-h") || opt.startsWith("--help"))
             printHelp_ = true;
-        else if (opt.startsWith("--device-info"))
-            deviceInfo_ = true;
         else if (opt.startsWith("-"))
             std::cerr << "Unknown option: " << opt.toStdString() << std::endl;
     }
@@ -146,7 +144,3 @@ bool Parser::notifySystemd() const
     return systemd_;
 }
 
-bool Parser::deviceInfo() const
-{
-    return deviceInfo_;
-}

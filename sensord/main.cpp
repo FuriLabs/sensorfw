@@ -34,8 +34,6 @@
 
 #include <systemd/sd-daemon.h>
 
-#include <deviceinfo.h>
-
 #include <unistd.h>
 #include <signal.h>
 #include <iostream>
@@ -226,15 +224,6 @@ int main(int argc, char *argv[])
     if(parser.configDirInput())
     {
         defConfigDir = parser.configDirPath();
-    }
-
-    if (parser.deviceInfo())
-    {
-        DeviceInfo *deviceInfo = new DeviceInfo();
-        if (deviceInfo->contains("sensorfwConfig")) {
-            defConfigFile = QString::fromStdString(deviceInfo->get("sensorfwConfig",
-                                                   defConfigFile.toStdString()));
-        }
     }
 
     if (!SensorFrameworkConfig::loadConfig(defConfigFile, defConfigDir))
