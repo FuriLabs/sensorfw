@@ -28,7 +28,7 @@
 
 #include "wristgesturesensor_a.h"
 
-Wrist	GestureSensorChannelAdaptor::WristGestureSensorChannelAdaptor(QObject* parent) :
+WristGestureSensorChannelAdaptor::WristGestureSensorChannelAdaptor(QObject* parent) :
     AbstractSensorChannelAdaptor(parent)
 {
 }
