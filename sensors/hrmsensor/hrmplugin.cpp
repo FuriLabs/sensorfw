@@ -45,5 +45,9 @@ void HrmPlugin::Init(class Loader& l)
 }
 
 QStringList HrmPlugin::Dependencies() {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    return QString("hrmadaptor").split(":", Qt::SkipEmptyParts);
+#else
     return QString("hrmadaptor").split(":", QString::SkipEmptyParts);
+#endif
 }
