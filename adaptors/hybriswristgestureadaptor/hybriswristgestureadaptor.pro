@@ -6,7 +6,7 @@ HEADERS += hybriswristgestureadaptor.h \
 SOURCES += hybriswristgestureadaptor.cpp \
            hybriswristgestureadaptorplugin.cpp
 
-LIBS+= -L../../core -lhybrissensorfw-qt5
+LIBS+= -L../../core -lhybrissensorfw-qt$${QT_MAJOR_VERSION}
 
 include( ../adaptor-config.pri )
 config_hybris {
