@@ -270,9 +270,10 @@ union SensorEventPayload {
     Uncal uncal ALIGNED(4);
     MetaData meta ALIGNED(4);
     float scalar ALIGNED(4);
+    uint64_t stepDetector ALIGNED(8);
     uint64_t stepCount ALIGNED(8);
-    uint64_t wakeStatus ALIGNED(8);
     HeartRate heartRate ALIGNED(4);
+    uint64_t wakeStatus ALIGNED(8);
     float pose6DOF[15] ALIGNED(4);
     Dynamicsensor_t dynamic ALIGNED(4);
     AdditionalInfo additional ALIGNED(4);
