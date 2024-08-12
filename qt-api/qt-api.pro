@@ -24,7 +24,8 @@ SOURCES += sensormanagerinterface.cpp \
     temperaturesensor_i.cpp \
     stepcountersensor_i.cpp \
     wakegesturesensor_i.cpp \
-    stepdetectorsensor_i.cpp
+    stepdetectorsensor_i.cpp \
+    tiltdetectorsensor_i.cpp
 
 HEADERS += sensormanagerinterface.h \
     sensormanager_i.h \
@@ -45,7 +46,8 @@ HEADERS += sensormanagerinterface.h \
     temperaturesensor_i.h \
     stepcountersensor_i.h \
     wakegesturesensor_i.h \
-    stepdetectorsensor_i.h
+    stepdetectorsensor_i.h \
+    tiltdetectorsensor_i.h
 
 SENSORFW_INCLUDEPATHS = .. \
     ../include \

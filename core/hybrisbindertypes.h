@@ -273,6 +273,7 @@ union SensorEventPayload {
     uint64_t stepDetector ALIGNED(8);
     uint64_t stepCount ALIGNED(8);
     HeartRate heartRate ALIGNED(4);
+    uint64_t tiltDetector ALIGNED(8);
     uint64_t wakeStatus ALIGNED(8);
     float pose6DOF[15] ALIGNED(4);
     Dynamicsensor_t dynamic ALIGNED(4);

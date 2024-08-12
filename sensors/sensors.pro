@@ -18,6 +18,7 @@ SUBDIRS  = accelerometersensor \
            temperaturesensor \
            stepcountersensor \
            wakegesturesensor \
-           stepdetectorsensor
+           stepdetectorsensor \
+           tiltdetectorsensor
 
 contextprovider:SUBDIRS += contextplugin
