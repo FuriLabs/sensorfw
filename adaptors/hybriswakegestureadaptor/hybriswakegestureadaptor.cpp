@@ -73,28 +73,27 @@ void HybrisWakeGestureAdaptor::processSample(const sensors_event_t& data)
     d->timestamp_ = quint64(data.timestamp * .001);
 
 #ifdef USE_BINDER
-    unsigned int stepCount = data.u.stepCount;
+    unsigned int wakeStatus = data.u.wakeStatus;
     // if hal returns a float, then it will end up being 1.0f which is 1065353216
-    if (stepCount == 1065353216) {
-        stepCount = 1;
-    }
-    d->value_ = stepCount;
+    if (wakeStatus == 1065353216)
+        wakeStatus = 1;
+    d->value_ = wakeStatus;
 #else
 #ifdef NO_SENSORS_EVENT_U64
     uint64_t value = 0;
     memcpy(&value, data.data, sizeof value);
-    unsigned int stepCount = static_cast<unsigned int>(value);
-    if (stepCount == 1065353216)
-        stepCount = 1;
+    unsigned int wakeStatus = static_cast<unsigned int>(value);
+    if (wakeStatus == 1065353216)
+        wakeStatus = 1;
 
     d->value_ = stepCount;
 #else
-    unsigned int stepCount = static_cast<unsigned int>(data.u64.step_counter);
-    if (stepCount == 1065353216)
-        stepCount = 1;
+    unsigned int wakeStatus = static_cast<unsigned int>(data.u64.wakeStatus);
+    if (wakeStatus == 1065353216)
+        wakeStatus = 1;
 
-    d->value_ = stepCount;
-    sensordLogD() << "HybrisWakeGestureAdaptor: processSample() - step_counter: " << data.u64.step_counter << ", value_: " << d->value_;
+    d->value_ = wakeStatus;
+    sensordLogD() << "HybrisWakeGestureAdaptor: processSample() - wakeStatus: " << data.u64.wakeStatus << ", value_: " << d->value_;
 #endif
 #endif
 
