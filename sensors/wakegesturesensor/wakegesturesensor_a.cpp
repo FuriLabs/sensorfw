@@ -35,6 +35,12 @@ Unsigned WakeGestureSensorChannelAdaptor::wakegesture() const
     return qvariant_cast<Unsigned>(parent()->property("wakegesture"));
 }
 
+void WakeGestureSensorChannelAdaptor::resetWakeGesture()
+{
+    QMetaObject::invokeMethod(parent(), "resetWakeGesture");
+    sensordLogD() << "wake gesture reset to 0";
+}
+
 int WakeGestureSensorChannelAdaptor::threshold() const
 {
     return qvariant_cast<int>(parent()->property("threshold"));

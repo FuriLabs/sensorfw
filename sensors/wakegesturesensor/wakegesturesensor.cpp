@@ -111,6 +111,31 @@ bool WakeGestureSensorChannel::stop()
     return true;
 }
 
+void WakeGestureSensorChannel::resetWakeGesture()
+{
+    SensorManager& sm = SensorManager::instance();
+    if (isValid()) {
+        disconnectFromSource(wakeGestureAdaptor_, "wakegesture", wakegestureReader_);
+        sm.releaseDeviceAdaptor("wakegestureadaptor");
+    }
+
+    wakeGestureAdaptor_ = sm.requestDeviceAdaptor("wakegestureadaptor");
+
+    filterBin_ = new Bin;
+    filterBin_->add(wakegestureReader_, "wakegesture");
+    filterBin_->add(outputBuffer_, "buffer");
+    filterBin_->join("wakegesture", "source", "buffer", "sink");
+
+    connectToSource(wakeGestureAdaptor_, "wakegesture", wakegestureReader_);
+
+    outputBuffer_->join(this);
+
+    prevWakeGesture = TimedUnsigned(0, 0);
+    emitData(prevWakeGesture);
+
+    Q_EMIT wakegestureChanged(prevWakeGesture.value_);
+}
+
 void WakeGestureSensorChannel::emitData(const TimedUnsigned& value)
 {
     prevWakeGesture.value_ = value.value_;

@@ -44,6 +44,7 @@ public:
 
 public Q_SLOTS:
     Unsigned wakegesture() const;
+    void resetWakeGesture();
     int threshold() const;
     void setThreshold(int value);
 
