@@ -111,6 +111,31 @@ bool StepDetectorSensorChannel::stop()
     return true;
 }
 
+void StepDetectorSensorChannel::resetStepDetector()
+{
+    SensorManager& sm = SensorManager::instance();
+    if (isValid()) {
+        disconnectFromSource(stepDetectorAdaptor_, "stepdetector", stepdetectorReader_);
+        sm.releaseDeviceAdaptor("stepdetectoradaptor");
+    }
+
+    stepDetectorAdaptor_ = sm.requestDeviceAdaptor("stepdetectoradaptor");
+
+    filterBin_ = new Bin;
+    filterBin_->add(stepdetectorReader_, "stepdetector");
+    filterBin_->add(outputBuffer_, "buffer");
+    filterBin_->join("stepdetector", "source", "buffer", "sink");
+
+    connectToSource(stepDetectorAdaptor_, "stepdetector", stepdetectorReader_);
+
+    outputBuffer_->join(this);
+
+    prevStepDetector = TimedUnsigned(0, 0);
+    emitData(prevStepDetector);
+
+    Q_EMIT stepDetectorChanged(prevStepDetector.value_);
+}
+
 void StepDetectorSensorChannel::emitData(const TimedUnsigned& value)
 {
     prevStepDetector.value_ = value.value_;
