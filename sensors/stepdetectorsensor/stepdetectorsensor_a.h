@@ -45,6 +45,7 @@ public:
 public Q_SLOTS:
     Unsigned stepdetector() const;
     int threshold() const;
+    void resetStepDetector();
     void setThreshold(int value);
 
 Q_SIGNALS:

@@ -40,6 +40,12 @@ int StepDetectorSensorChannelAdaptor::threshold() const
     return qvariant_cast<int>(parent()->property("threshold"));
 }
 
+void StepDetectorSensorChannelAdaptor::resetStepDetector()
+{
+    QMetaObject::invokeMethod(parent(), "resetStepDetector");
+    sensordLogD() << "step detector reset to 0";
+}
+
 void StepDetectorSensorChannelAdaptor::setThreshold(int value)
 {
     parent()->setProperty("threshold", value);
