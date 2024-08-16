@@ -75,6 +75,7 @@ public:
 public Q_SLOTS:
     bool start();
     bool stop();
+    void resetStepCounter();
 
 signals:
     /**
