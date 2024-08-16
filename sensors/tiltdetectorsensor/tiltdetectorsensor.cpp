@@ -111,6 +111,31 @@ bool TiltDetectorSensorChannel::stop()
     return true;
 }
 
+void TiltDetectorSensorChannel::resetTiltDetector()
+{
+    SensorManager& sm = SensorManager::instance();
+    if (isValid()) {
+        disconnectFromSource(tiltDetectorAdaptor_, "tiltdetector", tiltdetectorReader_);
+        sm.releaseDeviceAdaptor("tiltdetectoradaptor");
+    }
+
+    tiltDetectorAdaptor_ = sm.requestDeviceAdaptor("tiltdetectoradaptor");
+
+    filterBin_ = new Bin;
+    filterBin_->add(tiltdetectorReader_, "tiltdetector");
+    filterBin_->add(outputBuffer_, "buffer");
+    filterBin_->join("tiltdetector", "source", "buffer", "sink");
+
+    connectToSource(tiltDetectorAdaptor_, "tiltdetector", tiltdetectorReader_);
+
+    outputBuffer_->join(this);
+
+    prevTiltDetector = TimedUnsigned(0, 0);
+    emitData(prevTiltDetector);
+
+    Q_EMIT tiltDetectorChanged(prevTiltDetector.value_);
+}
+
 void TiltDetectorSensorChannel::emitData(const TimedUnsigned& value)
 {
     prevTiltDetector.value_ = value.value_;
