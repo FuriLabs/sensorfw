@@ -40,6 +40,12 @@ int TiltDetectorSensorChannelAdaptor::threshold() const
     return qvariant_cast<int>(parent()->property("threshold"));
 }
 
+int TiltDetectorSensorChannelAdaptor::resetTiltDetector()
+{
+    QMetaObject::invokeMethod(parent(), "resetTiltDetector");
+    sensordLogD() << "tilt detector reset to 0";
+}
+
 void TiltDetectorSensorChannelAdaptor::setThreshold(int value)
 {
     parent()->setProperty("threshold", value);

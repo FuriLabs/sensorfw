@@ -45,6 +45,7 @@ public:
 public Q_SLOTS:
     Unsigned tiltdetector() const;
     int threshold() const;
+    void resetTiltDetector();
     void setThreshold(int value);
 
 Q_SIGNALS:
