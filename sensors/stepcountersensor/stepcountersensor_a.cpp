@@ -36,3 +36,9 @@ Unsigned StepCounterSensorChannelAdaptor::steps() const
 {
     return qvariant_cast<Unsigned>(parent()->property("steps"));
 }
+
+void StepCounterSensorChannelAdaptor::resetStepCounter()
+{
+    QMetaObject::invokeMethod(parent(), "resetStepCounter");
+    sensordLogD() << "step counter reset to 0";
+}

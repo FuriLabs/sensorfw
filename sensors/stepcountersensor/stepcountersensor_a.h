@@ -47,6 +47,7 @@ public:
 
 public Q_SLOTS:
     Unsigned steps() const;
+    void resetStepCounter();
 
 Q_SIGNALS:
     void StepCounterChanged(const Unsigned& value);
