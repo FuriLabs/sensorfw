@@ -1,10 +1,8 @@
 [Unit]
 Description=Sensor daemon for sensor framework
 After=dbus.socket
-After=oneshot-root.service
 After=lxc@android.service
 Requires=dbus.service
-Conflicts=actdead.target
 
 [Service]
 Type=notify
