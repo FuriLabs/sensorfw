@@ -1,9 +1,8 @@
 Source: sensorfw-qt6
 Section: misc
 Priority: optional
-Maintainer: Lorn Potter <lorn.potter@gmail.com>
-Uploaders: 
-Build-Depends: debhelper (>=5),
+Maintainer: Bardia Moshiri <bardia@furilabs.com>
+Build-Depends: debhelper-compat ( = 13),
                qt6-base-dev,
                libudev-dev,
                libsystemd-dev,
@@ -15,8 +14,8 @@ Build-Depends: debhelper (>=5),
                libhybris-dev,
                libglib2.0-dev,
                libglibutil-dev,
-               libgbinder-dev
-Standards-Version: 3.7.3
+               libgbinder-dev,
+Standards-Version: 4.7.2
 
 Package: sensorfw-qt6
 Section: misc
